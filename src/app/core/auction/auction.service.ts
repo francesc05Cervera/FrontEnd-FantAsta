@@ -18,6 +18,10 @@ export class AuctionService {
     return this.http.get<AuctionResponse>(`${this.baseUrl}/${auctionId}`);
   }
 
+  getMyAuctions(): Observable<AuctionResponse[]> {
+    return this.http.get<AuctionResponse[]>(`${this.baseUrl}/mine`);
+  }
+
   update(auctionId: number, payload: UpdateAuctionRequest): Observable<AuctionResponse> {
     return this.http.put<AuctionResponse>(`${this.baseUrl}/${auctionId}`, payload);
   }

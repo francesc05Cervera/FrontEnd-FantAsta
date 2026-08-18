@@ -59,4 +59,11 @@ button[type='submit'][disabled] { opacity: .6; cursor: not-allowed; transform: n
 .form-actions { display: flex; align-items: center; gap: 1rem; margin-top: .5rem; }
 .btn-secondary { color: var(--text-muted); text-decoration: none; font-weight: 600; padding: .875rem 1rem; }
 .btn-secondary:hover { color: var(--text); }
+.auctions-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+.auction-item { display: flex; flex-direction: column; gap: .25rem; padding: .75rem; border: 1px solid var(--border); border-radius: 10px; background: rgba(15,23,42,.4); }
+.auction-item-main { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+.auction-item-title { font-size: 1rem; }
+.auction-item-code { color: var(--text-muted); font-size: .85rem; }
+.auction-item-meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: .85rem; color: var(--text-muted); }
+.auction-item-status, .auction-item-credits { white-space: nowrap; }
 @media (max-width: 480px) { .auth-container { padding: 2rem 1.5rem; margin: 1rem; } .auth-container h1 { font-size: 1.75rem; } .field-grid, .field-grid--4 { grid-template-columns: 1fr; } }

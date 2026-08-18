@@ -17,5 +17,9 @@ export interface UpdateStatusRequest {
 export interface AuctionResponse extends CreateAuctionRequest {
   id: number;
   status?: string;
+  auctionCode?: string;
+  creatorUserId?: number;
+  createdAt?: string;
+  updatedAt?: string;
   [key: string]: unknown;
 }
