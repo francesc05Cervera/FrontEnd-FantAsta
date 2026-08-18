@@ -1,0 +1,9 @@
+<nav class="navbar">
+  <a routerLink="/dashboard" class="navbar-brand">FantAsta</a>
+  <div class="navbar-actions">
+    @if (currentUser()) {
+      <span class="navbar-user">{{ currentUser()?.name }}</span>
+    }
+    <button type="button" class="btn-logout" (click)="logout()">Esci</button>
+  </div>
+</nav>

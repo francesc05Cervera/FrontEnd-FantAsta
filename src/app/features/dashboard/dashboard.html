@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+
+<div class="dashboard-container">
+  <h1>La tua area FantAsta</h1>
+  <p class="dashboard-subtitle">Crea una nuova asta o gestisci quelle esistenti.</p>
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <h2>Crea una nuova asta</h2>
+      <p>Imposta nome, crediti iniziali e limiti per ruolo per la tua prossima asta.</p>
+      <a routerLink="/auctions/new" class="btn-primary">Crea asta</a>
+    </div>
+    <div class="dashboard-card dashboard-card--placeholder">
+      <h2>Le mie aste</h2>
+      <p>L'elenco delle aste a cui partecipi arriverà presto: manca ancora un endpoint dedicato nell'Auction Service (es. <code>GET /api/auctions/mine</code>).</p>
+    </div>
+  </div>
+</div>

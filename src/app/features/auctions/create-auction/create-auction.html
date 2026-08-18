@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<div class="page-container">
+  <div class="auth-container auth-container--wide">
+    <h1>Crea una nuova asta</h1>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label for="name">Nome asta</label>
+        <input id="name" type="text" formControlName="name" placeholder="Es. Fantacalcio 2026/27" />
+        @if (form.get('name')?.invalid && form.get('name')?.touched) { <small class="error">Il nome è obbligatorio.</small> }
+      </div>
+      <div class="field-grid">
+        <div class="field"><label for="maxPlayersPerTeam">Giocatori per squadra</label><input id="maxPlayersPerTeam" type="number" formControlName="maxPlayersPerTeam" min="1" /></div>
+        <div class="field"><label for="initialCredits">Crediti iniziali</label><input id="initialCredits" type="number" formControlName="initialCredits" min="1" /></div>
+      </div>
+      <p class="field-section-title">Limiti per ruolo</p>
+      <div class="field-grid field-grid--4">
+        <div class="field"><label for="maxGoalkeepers">Portieri</label><input id="maxGoalkeepers" type="number" formControlName="maxGoalkeepers" min="0" /></div>
+        <div class="field"><label for="maxDefenders">Difensori</label><input id="maxDefenders" type="number" formControlName="maxDefenders" min="0" /></div>
+        <div class="field"><label for="maxMidfielders">Centrocampisti</label><input id="maxMidfielders" type="number" formControlName="maxMidfielders" min="0" /></div>
+        <div class="field"><label for="maxForwards">Attaccanti</label><input id="maxForwards" type="number" formControlName="maxForwards" min="0" /></div>
+      </div>
+      @if (errorMessage()) { <p class="error">{{ errorMessage() }}</p> }
+      <div class="form-actions">
+        <a routerLink="/dashboard" class="btn-secondary">Annulla</a>
+        <button type="submit" [disabled]="loading()">{{ loading() ? 'Creazione in corso...' : 'Crea asta' }}</button>
+      </div>
+    </form>
+  </div>
+</div>
