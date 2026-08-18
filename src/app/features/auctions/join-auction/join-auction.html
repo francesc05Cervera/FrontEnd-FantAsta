@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+
+<div class="page-container">
+  <div class="auth-container auth-container--wide">
+    <h1>Partecipa a un'asta</h1>
+    <p class="page-intro">Inserisci il codice che ti ha condiviso il creatore dell'asta.</p>
+
+    <form [formGroup]="form" (ngSubmit)="search()">
+      <div class="field">
+        <label for="auctionCode">Codice asta</label>
+        <input id="auctionCode" type="text" formControlName="auctionCode" placeholder="Es. BC2AA800" autocomplete="off" />
+        @if (form.get('auctionCode')?.invalid && form.get('auctionCode')?.touched) {
+          <small class="error">Inserisci un codice asta valido.</small>
+        }
+      </div>
+
+      <button type="submit" [disabled]="lookupLoading()">
+        {{ lookupLoading() ? 'Ricerca in corso...' : 'Cerca asta' }}
+      </button>
+    </form>
+
+    @if (errorMessage()) {
+      <p class="error form-feedback">{{ errorMessage() }}</p>
+    }
+
+    @if (successMessage()) {
+      <p class="success form-feedback">{{ successMessage() }}</p>
+    }
+
+    @if (foundAuction(); as auction) {
+      <section class="auction-preview">
+        <div class="auction-preview-header">
+          <div>
+            <p class="auction-preview-label">Asta trovata</p>
+            <h2>{{ auction.name }}</h2>
+          </div>
+          <span class="status-badge">{{ auction.status || 'N/D' }}</span>
+        </div>
+
+        <div class="auction-preview-grid">
+          <p><span>Codice</span><strong>{{ auction.auctionCode }}</strong></p>
+          <p><span>Crediti iniziali</span><strong>{{ auction.initialCredits }}</strong></p>
+          <p><span>Giocatori per squadra</span><strong>{{ auction.maxPlayersPerTeam }}</strong></p>
+          <p><span>Portieri / Difensori</span><strong>{{ auction.maxGoalkeepers }} / {{ auction.maxDefenders }}</strong></p>
+          <p><span>Centrocampisti / Attaccanti</span><strong>{{ auction.maxMidfielders }} / {{ auction.maxForwards }}</strong></p>
+        </div>
+
+        <button type="button" (click)="join()" [disabled]="joinLoading() || auction.status !== 'OPEN'">
+          {{ joinLoading() ? 'Invio in corso...' : 'Invia richiesta di partecipazione' }}
+        </button>
+        @if (auction.status !== 'OPEN') {
+          <p class="auction-preview-note">Le richieste sono disponibili solo per aste con stato OPEN.</p>
+        }
+      </section>
+    }
+
+    <p><a routerLink="/dashboard">Torna alla dashboard</a></p>
+  </div>
+</div>

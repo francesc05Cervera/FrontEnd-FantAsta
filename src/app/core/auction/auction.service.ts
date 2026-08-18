@@ -7,6 +7,7 @@ import { AuctionResponse, CreateAuctionRequest, UpdateAuctionRequest, UpdateStat
 @Injectable({ providedIn: 'root' })
 export class AuctionService {
   private readonly baseUrl = `${environment.auctionApiUrl}/auctions`;
+  private readonly participantsBaseUrl = `${environment.auctionApiUrl}/participants`;
 
   constructor(private http: HttpClient) {}
 
@@ -20,6 +21,14 @@ export class AuctionService {
 
   getMyAuctions(): Observable<AuctionResponse[]> {
     return this.http.get<AuctionResponse[]>(`${this.baseUrl}/mine`);
+  }
+
+  findByCode(auctionCode: string): Observable<AuctionResponse> {
+    return this.http.get<AuctionResponse>(`${this.baseUrl}/code/${encodeURIComponent(auctionCode.trim())}`);
+  }
+
+  join(auctionId: number): Observable<string> {
+    return this.http.post(`${this.participantsBaseUrl}/${auctionId}/join`, null, { responseType: 'text' });
   }
 
   update(auctionId: number, payload: UpdateAuctionRequest): Observable<AuctionResponse> {
